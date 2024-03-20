@@ -17,7 +17,7 @@ void version_info(char *argv[]) {
     std::exit(1);
 }
 
-int main(int argc, char *argv[]) {
+int dashing_main(int argc, char *argv[]) { //modified name of the main function to expose it
     bns::executable = argv[0];
     const std::unordered_map<std::string, int (*)(int, char**)> submap
 {
