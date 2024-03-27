@@ -292,18 +292,19 @@ static option_struct sketch_long_options[] = {\
 
 // Main functions
 int sketch_main(int argc, char *argv[]) {
+    //wsz: window size, k: k-mer size, sketch_size, skip_cached: skip cached sketches, nthreads: #threads for parallel processing, mincount: minimum count threshold for k-mers (for countmin sketch), nhashes: #hashes to use in sketches, cmsketchsize: size of countminsketch to -1 = not a set
     int wsz(0), k(31), sketch_size(10), skip_cached(false), co, nthreads(1), mincount(1), nhashes(1), cmsketchsize(-1);
     int canon(true);
     int entropy_minimization = false, avoid_fsorting = false, weighted_jaccard = false;
-    hll::EstimationMethod estim = hll::EstimationMethod::ERTL_MLE;
+    hll::EstimationMethod estim = hll::EstimationMethod::ERTL_MLE; //set estimation method for HLL sketches to ERTL Maximum Likelihood Estimation
     hll::JointEstimationMethod jestim = static_cast<hll::JointEstimationMethod>(hll::EstimationMethod::ERTL_MLE);
     std::string spacing, paths_file, suffix, prefix, output_file;
     sketching_method sm = EXACT;
     Sketch sketch_type = HLL;
-    EncodingType enct = BONSAI;
+    EncodingType enct = BONSAI; //encoding type of k-mers
     uint64_t seedseedseed = 1337u;
     int option_index = 0;
-    SKETCH_LONG_OPTS
+    SKETCH_LONG_OPTS //macro for command line argument parsing
     while((co = getopt_long(argc, argv, "n:P:F:o:p:x:R:s:S:k:w:H:q:B:8JbfjEIcCeh?", sketch_long_options, &option_index)) >= 0) {
         switch(co) {
             case 'B': gargs.bbnbits = std::atoi(optarg); break;
