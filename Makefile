@@ -52,6 +52,8 @@ ifneq (,$(findstring g++,$(CXX)))
 	endif
 endif
 
+#maybe needs to be kthread.c not .o
+#OBJS=$(patsubst %.c,%.o,$(wildcard src/*.c) bonsai/klib/kthread.o) $(patsubst %.cpp,%.o,$(wildcard src/*.cpp) src/new_main.cpp) bonsai/klib/kstring.o clhash.o
 OBJS=$(patsubst %.c,%.o,$(wildcard src/*.c) bonsai/klib/kthread.o) $(patsubst %.cpp,%.o,$(wildcard src/*.cpp)) bonsai/klib/kstring.o clhash.o
 DOBJS=$(patsubst %.c,%.do,$(wildcard src/*.c) bonsai/klib/kthread.o) $(patsubst %.cpp,%.do,$(wildcard src/*.cpp)) bonsai/klib/kstring.o clhash.o
 
@@ -115,7 +117,7 @@ bonsai/zstd/zlibWrapper/%.c:
 dashing.a: src/dashing.o  libzstd.a bonsai/klib/kthread.o bonsai/clhash.o $(ALL_ZOBJS)
 	ar r dashing.a src/dashing.o  libzstd.a $(ALL_ZOBJS) bonsai/klib/kthread.o bonsai/clhash.o
 
-BACKUPOBJ=src/main.o src/union.o src/hllmain.o src/mkdistmain.o src/finalizers.o src/cardests.o src/distmain.o src/construct.o src/flatten_all.o \
+BACKUPOBJ=src/new_main.o src/union.o src/hllmain.o src/mkdistmain.o src/finalizers.o src/cardests.o src/distmain.o src/construct.o src/flatten_all.o \
         $(patsubst %.cpp,%.o,$(wildcard src/sketchcmp*.cpp) $(wildcard src/sketchcore*.cpp)) src/background.o src/panel.o src/cardmain.o src/distbyseq.cpp
 CARDCMPO=src/cardmain.o src/finalizers.o src/dashing.o
 DASHINGSRC=src/main.cpp src/union.cpp src/hllmain.cpp src/mkdistmain.cpp src/finalizers.cpp src/cardests.cpp src/distmain.cpp src/construct.cpp src/flatten_all.cpp \
@@ -128,7 +130,7 @@ bonsai/zstd/zlibWrapper/%.o: bonsai/zstd/zlibWrapper/%.c
 %: src/%.cpp $(ALL_ZOBJS) $(DEPS) libzstd.a $(DASHING_OBJ) $(wildcard src/*.h)
 	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS)  -O3 $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -march=native -DNDEBUG
 
-dashing-ar: src/main.o dashing.a
+dashing-ar: src/new_main.o dashing.a
 	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) dashing.a -O3 $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -DNDEBUG
 
 %: src/%.o dashing.a
@@ -143,8 +145,8 @@ dashing: src/dashing.o $(ALL_ZOBJS) $(DEPS)  libzstd.a $(BACKUPOBJ)
 dashing_d: $(ALL_ZOBJS) $(DEPS) libzstd.a $(DASHINGSRC)
 	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) $(DASHINGSRC)  -O1 $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -march=native src/dashing.cpp # -DNDEBUG
 
-%0: src/%.o $(ALL_ZOBJS) $(DEPS)  libzstd.a src/main.o
-	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) src/main.o  -O0 $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -march=native
+%0: src/%.o $(ALL_ZOBJS) $(DEPS)  libzstd.a src/new_main.o
+	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) src/new_main.o  -O0 $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -march=native
 
 src/%.o: src/%.cpp $(DEPS)  libzstd.a $(wildcard src/*.h)
 	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) -c -O3 $<  -o $@ $(ZCOMPILE_FLAGS) $(LIB) -DNDEBUG -march=native
@@ -152,8 +154,8 @@ src/%.o: src/%.cpp $(DEPS)  libzstd.a $(wildcard src/*.h)
 sparse%: src/%.cpp $(ALL_ZOBJS) $(DEPS)
 	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) -DUSE_SPARSE -O3 $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -DNDEBUG -march=native
 
-%_d: src/%.cpp $(ALL_ZOBJS) $(DEPS) src/main.o
-	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) -g src/main.o \
+%_d: src/%.cpp $(ALL_ZOBJS) $(DEPS) src/new_main.o
+	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) -g src/new_main.o \
     $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -O1 -lz # -fsanitize=undefined -fsanitize=address
 
 dashing_256: $(DASHINGSRC) $(ALL_ZOBJS) $(DEPS)
