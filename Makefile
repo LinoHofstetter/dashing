@@ -34,9 +34,9 @@ all: dashing
 
 #was obj before
 dashing: $(OBJS)
-
+ 
 %.o: %.cpp
-    $(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 %.o: %.c
     $(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
