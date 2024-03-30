@@ -29,15 +29,17 @@ LD=-L.
 OBJS=$(patsubst %.c,%.o,$(wildcard src/*.c) bonsai/klib/kthread.o) \
      $(patsubst %.cpp,%.o,$(wildcard src/*.cpp)) bonsai/klib/kstring.o clhash.o
 
-all: obj
+#was obj before (instead of dashing)
+all: dashing
 
-obj: $(OBJS)
+#was obj before
+dashing: $(OBJS)
 
 %.o: %.cpp
-     $(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
+    $(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 %.o: %.c
-     $(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
+    $(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-     rm -f $(OBJS) && cd bonsai/zstd && $(MAKE) clean && cd ../../bonsai/zlib && $(MAKE) clean && cd ../..
+    rm -f $(OBJS) && cd bonsai/zstd && $(MAKE) clean && cd ../../bonsai/zlib && $(MAKE) clean && cd ../..
