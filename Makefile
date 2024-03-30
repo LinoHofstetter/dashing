@@ -39,7 +39,7 @@ dashing: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 %.o: %.c
-    $(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-    rm -f $(OBJS) && cd bonsai/zstd && $(MAKE) clean && cd ../../bonsai/zlib && $(MAKE) clean && cd ../..
+	rm -f $(OBJS) && cd bonsai/zstd && $(MAKE) clean && cd ../../bonsai/zlib && $(MAKE) clean && cd ../..
