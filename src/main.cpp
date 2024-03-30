@@ -71,4 +71,3 @@ int dashing_main(int argc, char *argv[]) { //modified name of the main function 
     }
     return EXIT_FAILURE;
 }
-
