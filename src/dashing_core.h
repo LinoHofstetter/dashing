@@ -13,7 +13,7 @@ namespace bns {
     int sketch_main(int, char**);
     int union_main(int, char**);
     int dist_main(int, char**);
-    int hll_main(int, char**);
+    int hll_main(int, char**);d
     int view_main(int, char**);
     int fold_main(int, char**);
     int panel_main(int, char**);
@@ -24,10 +24,10 @@ namespace bns {
     int sketch_by_seq_main(int, char**);
     
     
-    void version_info(char *argv[]);
-    int dashing_main(int argc, char *argv[]);
 }
 
+void version_info(char *argv[]);
+int dashing_main(int argc, char *argv[]);
 
 
 #endif // DASHING_CORE_H

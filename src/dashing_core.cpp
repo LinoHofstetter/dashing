@@ -1,6 +1,4 @@
 #include "dashing_core.h"
-#include "dashing.h"
-#include "sketch_and_cmp.h"
 
 using namespace bns;
 
