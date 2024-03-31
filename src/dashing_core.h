@@ -1,8 +1,12 @@
 #ifndef DASHING_CORE_H
 #define DASHING_CORE_H
 
+#include "dashing.h"
+#include "sketch_and_cmp.h"
 #include <string>
 #include <unordered_map>
+#include <algorithm>
+#include <cctype>
 
 // Forward declarations of the functions referenced in the map
 namespace bns {
