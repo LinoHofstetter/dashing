@@ -137,8 +137,12 @@ dashing-ar: src/main.o dashing.a
 cardcmp: src/cardcmp.o $(ALL_ZOBJS) $(DEPS)  libzstd.a $(CARDCMPO)
 	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) -O3 $< -o $@ $(CARDCMPO) $(ZCOMPILE_FLAGS) $(LIB) -march=native -DNDEBUG -lz
 
-dashing: src/dashing.o $(ALL_ZOBJS) $(DEPS)  libzstd.a $(BACKUPOBJ)
-	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) $(BACKUPOBJ)  -O3 $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -march=native -DNDEBUG -lz
+#dashing: src/dashing.o $(ALL_ZOBJS) $(DEPS)  libzstd.a $(BACKUPOBJ)
+#	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) $(BACKUPOBJ)  -O3 $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -march=native -DNDEBUG -lz
+
+dashing: src/dashing.o $(ALL_ZOBJS) $(DEPS) libzstd.a $(BACKUPOBJ) src/dashing_core.o
+	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) src/dashing.o src/dashing_core.o $(ALL_ZOBJS) $(BACKUPOBJ) -O3 -o $@ $(ZCOMPILE_FLAGS) $(LIB) -march=native -DNDEBUG -lz
+
 
 dashing_d: $(ALL_ZOBJS) $(DEPS) libzstd.a $(DASHINGSRC)
 	$(CXX) $(CXXFLAGS) $(DBG) $(INCLUDE) $(LD) $(ALL_ZOBJS) $(DASHINGSRC)  -O1 $< -o $@ $(ZCOMPILE_FLAGS) $(LIB) -march=native src/dashing.cpp # -DNDEBUG
