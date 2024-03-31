@@ -13,7 +13,7 @@ namespace bns {
     int sketch_main(int, char**);
     int union_main(int, char**);
     int dist_main(int, char**);
-    int hll_main(int, char**);d
+    int hll_main(int, char**);
     int view_main(int, char**);
     int fold_main(int, char**);
     int panel_main(int, char**);
