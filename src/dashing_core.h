@@ -18,11 +18,12 @@ namespace bns {
     int dist_by_seq_main(int, char**);
     int cmp_by_seq_main(int, char**);
     int sketch_by_seq_main(int, char**);
-    // Add more as needed...
+    
+    
+    void version_info(char *argv[]);
+    int dashing_main(int argc, char *argv[]);
 }
 
-// Other declarations (e.g., version_info, dashing_main)
-void version_info(char *argv[]);
-int dashing_main(int argc, char *argv[]);
+
 
 #endif // DASHING_CORE_H
