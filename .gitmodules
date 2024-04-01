@@ -6,4 +6,4 @@
 	url = https://github.com/madler/zlib
 [submodule "sketch"]
 	path = sketch
-	url = https://github.com/dnbaker/sketch.git
+	url = https://github.com/LinoHofstetter/sketch.git
