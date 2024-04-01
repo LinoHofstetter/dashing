@@ -9,6 +9,7 @@
 #include <cctype>
 
 // Forward declarations of the functions referenced in the map
+/*
 namespace bns {
     int sketch_main(int, char**);
     int union_main(int, char**);
@@ -24,7 +25,7 @@ namespace bns {
     int sketch_by_seq_main(int, char**);
     
     
-}
+}*/
 
 void version_info(char *argv[]);
 int dashing_main(int argc, char *argv[]);
